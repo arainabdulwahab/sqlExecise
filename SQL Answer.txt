@@ -1,0 +1,5 @@
+create table cinema.attori(cod_attore int(11) primary key , nome varchar(255) NOT NULL, anno_nascita varchar(255) NOT NULL, nazionalita varchar(255) NOT NULL); 
+create	table cinema.film(cod_film int(11) primary key ,  titolo varchar(255) not null, anno_produzione varchar(255) not null, nazionalita varchar(255) not null,  registra varchar(255) not null, genere varchar(255) not null); 
+create table cinema.recita (cod_attore int(11), cod_film int(11) ,FOREIGN KEY (cod_attore) REFERENCES attori(cod_attore), FOREIGN KEY ( cod_film) REFERENCES film(cod_film)); 
+create table cinema.sale (cod_sala int(11)  primary key, posti  int(11) not null, nome varchar(255) not null, citta varchar(255) not null);   
+create table cinema.proiezioni (cod_Proiezione int(11)  primary key, cod_film int(11) not null, cod_sala int(11) not null, incasso double not null, data_proiezione varchar(255) not null, FOREIGN key (cod_film) REFERENCES film(cod_film), FOREIGN KEY (cod_sala) REFERENCES sale(cod_sala));
