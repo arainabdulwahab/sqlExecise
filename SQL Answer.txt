@@ -23,8 +23,6 @@ select titolo from cinema.film f where  f.regista = "f.fellini" && f.anno_produz
 select titolo from cinema.film  f  where f.genere = "fantascienza" AND (f.nazionalita = "giapponesi"  OR f.nazionalita = "francesi") AND f.anno_produzione > 1990 ;
 
 
-
-
 4- Il titolo dei film di fantascienza giapponesi prodotti dopo il 1990 oppure francesi 
 
 select titolo from cinema.film  f  where f.genere = "fantascienza" AND f.nazionalita = "giapponesi" AND f.anno_produzione > 1990  OR f.nazionalita = "francesi";
@@ -44,6 +42,59 @@ from  cinema.film as f
  JOIN cinema.proiezioni p
  on p.cod_film = f.cod_film
 where p.data_proiezione = "25-12-2004"; 
+
+
+7- Il titolo ed il genere dei film proiettati a Napoli il giorno di Natale 2004 
+
+select f.titolo, f.genere 
+from cinema.film as f 
+join cinema.proiezioni as p
+on f.cod_film = p.cod_film
+join cinema.sale as s 
+on p.cod_sala = s.cod_sala 
+where p.data_proiezione = "25-12-2004" && s.citta = "napoli"
+
+
+8- I nomi delle sale di Napoli in cui il giorno di Natale 2004 è stato proiettato un film con
+R.Williams
+
+SELECT s.nome 
+FROM cinema.sale as s 
+JOIN cinema.proiezioni as p
+on p.cod_sala = s.cod_sala
+JOIN cinema.film as f 
+on f.cod_film = p.cod_film
+JOIN recita as r 
+on r.cod_film = f.cod_film
+JOIN cinema.attori  as a 
+on a.cod_attore = r.cod_attore
+where s.citta = "napoli" AND p.data_proiezione = "25-12-2004" AND a.nome = "R.Williams";
+
+
+9- Il titolo dei film in cui recita M. Mastroianni oppure S.Loren 
+
+SELECT f.titolo 
+FROM cinema.film as f 
+JOIN cinema.recita as r 
+ON r.cod_film = f.cod_film
+JOIN cinema.attori as a 
+ON a.cod_attore = r.cod_attore
+WHERE a.nome = "M. Mastroianni" OR a.nome = " S.Loren";
+
+
+10- Il titolo dei film in cui recitano M. Mastroianni e S.Loren
+
+SELECT f.titolo 
+FROM cinema.film as f 
+JOIN cinema.recita as r 
+ON r.cod_film = f.cod_film
+JOIN cinema.attori as a 
+ON a.cod_attore = r.cod_attore
+WHERE a.nome = "M. Mastroianni" AND a.nome = " S.Loren";
+
+
+
+
 
 
 
