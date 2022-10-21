@@ -10,20 +10,63 @@ create table cinema.proiezioni (cod_Proiezione int(11)  primary key, cod_film in
 
 1- Il nome di tutte le sale di Pisa 
  	
-select nome from  cinema.sale where citta= "pisa";
+select nome from  cinema.sale s where s.citta= "pisa";
 
 
 2- Il titolo dei film di F. Fellini prodotti dopo il 1960.
 
-select titolo from cinema.film where  regista = "f.fellini" && anno_produzione > 1960
+select titolo from cinema.film f where  f.regista = "f.fellini" && f.anno_produzione > 1960
 
 
 3- Il titolo e la durata dei film di fantascienza giapponesi o francesi prodotti dopo il 1990 
+
+select titolo from cinema.film  f  where f.genere = "fantascienza" AND (f.nazionalita = "giapponesi"  OR f.nazionalita = "francesi") AND f.anno_produzione > 1990 ;
 
 
 
 
 4- Il titolo dei film di fantascienza giapponesi prodotti dopo il 1990 oppure francesi 
 
-select titolo from cinema.film where genere = "fantascienza" AND (nazionalita = "giapponesi"  OR nazionalita = "francesi") AND anno_produzione > 1990 ;
+select titolo from cinema.film  f  where f.genere = "fantascienza" AND f.nazionalita = "giapponesi" AND f.anno_produzione > 1990  OR f.nazionalita = "francesi";
+
+
+5- I titolo dei film dello stesso regista di “Casablanca”
+
+select titolo from cinema.film f where f.regista =( select f.regista where f.nazionalita = "casablanca");
+
+
+6- Il titolo ed il genere dei film proiettati il giorno di Natale 2004 
+se
+
+
+select f.titolo, f.genere  
+from  cinema.film as f
+ JOIN cinema.proiezioni p
+ on p.cod_film = f.cod_film
+where p.data_proiezione = "25-12-2004"; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
