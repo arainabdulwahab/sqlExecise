@@ -164,7 +164,27 @@ JOIN cinema.proiezioni as p
 ON p.cod_film = f.cod_film 
 GROUP BY f.regista 
 
+19- Per ogni film di S.Spielberg, il titolo del film, il numero totale
+ di proiezioni a Pisa e l’incasso  totale
 
+
+SELECT f.titolo , COUNT(p.incasso) as "incasso totale di S.Spielberg a pisa " 
+FROM cinema.film as f 
+JOIN cinema.proiezioni as p 
+ON p.cod_film = f.cod_film 
+JOIN cinema.sale as s 
+ON s.cod_sala = p.cod_sala
+WHERE f.regista = "S.Spielberg" AND s.citta = "pisa"
+GROUP BY f.regista  
+
+
+20- Per ogni regista e per ogni attore, il numero di film del regista 
+con l’attore
+
+SELECT f.regista, a.nome, count(*) as "numero Film"
+FROM cinema.attori as a, cinema.recita as r, cinema.Film  as f
+WHERE a.cod_attore=r.cod_attore and r.cod_film = f.cod_film
+GROUP BY f.regista, a.cod_attore, a.nome
 
 
 
