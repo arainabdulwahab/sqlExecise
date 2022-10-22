@@ -133,6 +133,56 @@ WHERE s.citta = "pisa"
 
 
 
+15- Per ogni città, il numero di sale 
+
+SELECT s.citta, COUNT(*) as "numero delle sale in ogni citta"
+FROM cinema.sale as s 
+GROUP BY s.citta
+
+16- Per ogni città, il numero di sale con più di 60 posti
+
+SELECT s.citta, COUNT(*) as "numero delle sale in ogni citta"
+FROM cinema.sale as s 
+WHERE s.posti > 60
+GROUP BY s.citta
+
+
+17- Per ogni regista, il numero di film diretti dopo il 1990
+
+
+SELECT f.regista , COUNT(f.anno_produzione) as "numero dei film" 
+FROM cinema.film as f 
+WHERE f.anno_produzione > 1990
+GROUP BY f.regista 
+
+18- Per ogni regista, l’incasso totale di tutte le proiezioni dei suoi film
+
+
+SELECT f.regista , COUNT(p.incasso) as "incasso totale in base al regista" 
+FROM cinema.film as f 
+JOIN cinema.proiezioni as p 
+ON p.cod_film = f.cod_film 
+GROUP BY f.regista 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
