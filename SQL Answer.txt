@@ -93,6 +93,63 @@ ON a.cod_attore = r.cod_attore
 WHERE a.nome = "M. Mastroianni" AND a.nome = " S.Loren";
 
 
+11- Per ogni film in cui recita un attore francese, il titolo del film e il nome dell’attore
+
+
+
+SELECT f.titolo , a.nome 
+FROM cinema.film as F
+JOIN cinema.recita as r
+ON r.cod_film = f.cod_film 
+JOIN cinema.attori as a 
+ON a.cod_attore = r.cod_attore
+where a.nazionalita = "francese"
+
+
+12- Per ogni film che è stato proiettato a Pisa nel gennaio 2005, il titolo del film e il nome della
+sala. 
+
+
+SELECT f.titolo, s.nome 
+FROM cinema.film as f 
+JOIN cinema.proiezioni as p
+ON p.cod_film = f.cod_film 
+JOIN cinema.sale as s 
+ON s.cod_sala = p.cod_sala 
+WHERE p.data_proiezione = "25-12-2005" AND s.citta = "pisa" 
+
+13- Il numero di sale di Pisa con più di 60 posti 
+
+
+SELECT COUNT(*)
+FROM cinema.sale as s
+WHERE s.citta = "pisa" AND s.posti > 60
+
+14- Il numero totale di posti nelle sale di Pisa 
+
+SELECT COUNT(s.posti)
+FROM cinema.sale as s
+WHERE s.citta = "pisa" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
